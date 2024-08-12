@@ -1,6 +1,10 @@
 const Mongoose = require("mongoose");
 
 const playersSchema = new Mongoose.Schema({
+    id: {
+        type: String,
+        required: true,
+    }, 
     name: {
         type: String,
         required: true,
