@@ -3,6 +3,7 @@ const Mongoose = require("mongoose");
 const playersSchema = new Mongoose.Schema({
     id: {
         type: String,
+        default: new mongoose.Types.ObjectId(),
         required: true,
     }, 
     name: {
