@@ -4,7 +4,7 @@ const playersSchema = new Mongoose.Schema({
     id: {
         type: String,
         required: true,
-        default: new mongoose.Types.ObjectId(),
+        default: new Mongoose.Types.ObjectId(),
     }, 
     name: {
         type: String,
