@@ -3,7 +3,7 @@ const Player = require('../model/model');  // Adjust the path as necessary
 async function findPlayer(req, res, next) {
     let player;
     try {
-        player = await Player.findById(req.params._id);
+        player = await Player.findById(req.params.id);
         if (!player) {
             return res.status(404).json({ message: 'Player not found' });
         }
