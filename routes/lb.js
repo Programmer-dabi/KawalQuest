@@ -14,7 +14,7 @@ router.get('/', async(req, res)=>{
 })
 
 
-router.get('/id', findPlayer,async(req, res)=>{
+router.get('/:id', findPlayer,async(req, res)=>{
     res.json(req.player);
 })
 
@@ -34,7 +34,7 @@ router.post('/', async(req, res)=>{
 })
 
 
-router.delete('/id', findPlayer, async (req, res) => {
+router.delete('/:id', findPlayer, async (req, res) => {
     try {
         await req.player.deleteOne();
         res.json({ message: 'Deleted Player' });
@@ -44,7 +44,7 @@ router.delete('/id', findPlayer, async (req, res) => {
 });
 
 
-router.patch('/id', findPlayer, async(req, res)=>{
+router.patch('/:id', findPlayer, async(req, res)=>{
     if (req.body.Points != null) {
         req.player.Points = req.body.Points;
     }
