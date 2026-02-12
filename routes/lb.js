@@ -1,7 +1,9 @@
 const express = require('express');
+const User = require('../model/loginmodel');
 const router = express.Router();
 const player = require('../model/model');
 const findPlayer = require('../middleware/middleware'); 
+const finduser = require('../middleware/usermiddleware');
 
 router.get('/', async(req, res)=>{
     try{
@@ -33,6 +35,23 @@ router.post('/', async(req, res)=>{
     }
 })
 
+router.post('/signup', async(req, res)=>{
+    const addplayer = new User({
+        Username: req.body.username,
+        Password: req.body.Password,
+        Points: req.body.Points,
+    })
+
+    try{
+        const NewPlayer = await addplayer.save();
+        res.status(201).json(NewPlayer)
+    }catch(err){
+        res.status(500).json({message: err.message})
+    }
+})
+router.get('/user/:_id', finduser,async(req, res)=>{
+    res.json(req.player);
+})
 
 router.delete('/:_id', findPlayer, async (req, res) => {
     try {

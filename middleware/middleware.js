@@ -1,3 +1,4 @@
+
 const Player = require('../model/model');  // Adjust the path as necessary
 
 async function findPlayer(req, res, next) {
