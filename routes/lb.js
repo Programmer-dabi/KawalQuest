@@ -34,7 +34,7 @@ router.post('/', async(req, res)=>{
         res.status(500).json({message: err.message})
     }
 })
-
+//------------- User -------------------
 router.post('/signup', async(req, res)=>{
     const addplayer = new User({
         Username: req.body.username,
@@ -52,7 +52,30 @@ router.post('/signup', async(req, res)=>{
 router.get('/user/:_id', finduser,async(req, res)=>{
     res.json(req.player);
 })
+router.get('user/', async(req, res)=>{
+    try{
+        const allPlayer = await User.find();
+        res.json(allPlayer)
 
+    }catch(err){
+        res.status(500).json({message: err.message})
+    }
+})
+
+router.patch('/:_id', finduser, async(req, res)=>{
+    if (req.body.Points != null) {
+        req.player.Points = req.body.Points;
+    }
+
+    try {
+        const updatedPlayer = await User.save();
+        res.json(updatedPlayer);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+})
+
+// --------------------------------
 router.delete('/:_id', findPlayer, async (req, res) => {
     try {
         await req.player.deleteOne();
