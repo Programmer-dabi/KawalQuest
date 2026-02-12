@@ -1,6 +1,5 @@
 const Mongoose = require("mongoose");
 
-
 const playersSchema = new Mongoose.Schema({
     Username: {
         type: String,
@@ -44,5 +43,5 @@ return bcrypt.compare(candidatePassword, this.password);
 };
 
 // Create and export the model
-const User = mongoose.model('User', playersSchema);
+const User = Mongoose.model('User', playersSchema);
 module.exports = User;
