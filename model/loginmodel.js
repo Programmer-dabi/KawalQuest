@@ -38,9 +38,9 @@ try {
 });
 
 // Method to compare entered password with hashed password
-playersSchema.methods.comparePassword = async function (candidatePassword) {
-return bcrypt.compare(candidatePassword, this.password);
-};
+// playersSchema.methods.comparePassword = async function (candidatePassword) {
+// return bcrypt.compare(candidatePassword, this.password);
+// };
 
 // Create and export the model
 const User = Mongoose.model('User', playersSchema);
