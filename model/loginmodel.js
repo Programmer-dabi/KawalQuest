@@ -1,5 +1,5 @@
-const Mongoose = require("mongoose");
 const bcrypt = require('bcrypt');
+const Mongoose = require("mongoose");
 
 const playersSchema = new Mongoose.Schema({
     Username: {
