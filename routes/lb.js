@@ -52,25 +52,22 @@ router.post('/signup', async(req, res)=>{
 
 
 router.post('/login', async (req, res) => {
+    const { username, password } = req.body;
+
+    if (!username || !password)
+        return res.status(400).json({ message: "Username and password required" });
 
     try {
+        const user = await User.findOne({ Username: username });
 
-        const user = await User.findOne({
-            Username: req.body.username
-        });
+        if (!user) return res.status(404).json({ message: "User not found" });
 
-        if (!user)
-            return res.status(404).json({ message: "User not found" });
+        if (user.Password !== password) return res.status(401).json({ message: "Wrong password" });
 
-        if (user.Password !== req.body.password)
-            return res.status(401).json({ message: "Wrong password" });
-
-        res.json(user);
-
+        res.json({ message: "Login successful", user });
     } catch (err) {
         res.status(500).json({ message: err.message });
     }
-
 });
 
 router.get('/user/:_id', finduser,async(req, res)=>{
