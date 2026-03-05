@@ -62,8 +62,10 @@ router.post('/login', async (req, res) => {
 
         if (!user) return res.status(404).json({ message: "User not found" });
 
-        if ((user.Password || "").trim() !== password.trim())
-            return res.status(401).json({ message: "Wrong password" });
+        // if ((user.Password || "").trim() !== password.trim())
+        //     return res.status(401).json({ message: "Wrong password" });
+        const isMatch = await user.comparePassword(password);
+        if (!isMatch) return res.status(401).json({ message: "Wrong password" });
 
         // Remove password from response
         const userObj = user.toObject();

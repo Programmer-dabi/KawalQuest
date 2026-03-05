@@ -42,6 +42,9 @@ try {
 // playersSchema.methods.comparePassword = async function (candidatePassword) {
 // return bcrypt.compare(candidatePassword, this.password);
 // };
+playersSchema.methods.comparePassword = async function (candidatePassword) {
+    return bcrypt.compare(candidatePassword, this.Password);
+};
 
 // Create and export the model
 const User = Mongoose.model('User', playersSchema);
