@@ -26,11 +26,11 @@ const playersSchema = new Mongoose.Schema({
 playersSchema.pre('save', async function (next) {
 try {
     // Only hash if password is modified or new
-    if (!this.isModified('password')) return next();
+    if (!this.isModified('Password')) return next();
 
     // Generate salt and hash password
     const salt = await bcrypt.genSalt(10);
-    this.password = await bcrypt.hash(this.password, salt);
+    this.Password = await bcrypt.hash(this.Password, salt);
     next();
 } catch (err) {
     next(err);

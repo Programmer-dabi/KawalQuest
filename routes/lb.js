@@ -58,14 +58,17 @@ router.post('/login', async (req, res) => {
         return res.status(400).json({ message: "Username and password required" });
 
     try {
-        const user = await User.findOne({ Username: username });
+        const user = await User.findOne({ Username: username }).select('+Password');
 
         if (!user) return res.status(404).json({ message: "User not found" });
 
         if ((user.Password || "").trim() !== password.trim())
             return res.status(401).json({ message: "Wrong password" });
 
-        res.json({ message: "Login successful", user });
+        // Remove password from response
+        const userObj = user.toObject();
+        delete userObj.Password;
+        res.json({ message: "Login successful", user: userObj });
     } catch (err) {
         res.status(500).json({ message: err.message });
     }
